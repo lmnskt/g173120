@@ -1,6 +1,6 @@
 {
     "name": "lmnskt/dolgosrok",
-    "description": "Description[]",
+    "description": "Get currency exchange for each currency in each day",
     "license": "proprietary",
     "minimum-stability": "dev",
     "autoload": {
