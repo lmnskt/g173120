@@ -1,0 +1,64 @@
+body{
+    font-family: Calibri;
+    background-color: #dbdbdb;
+}
+
+.currencyForm {
+    width: 230px; 
+    margin: 20px auto;
+    padding-top: 10px; 
+    padding-bottom: 5px; 
+    border-radius: 10px;
+    background-color: #6d5ce5;
+    text-align: center;
+}
+
+.currencyForm select{
+    font-family: Calibri;
+    font-size: 100%;
+    background-color: #dbdbdb;
+}
+
+.dateForm{
+    width: 230px; 
+    margin: 20px auto;
+    padding-top: 10px; 
+    padding-bottom: 15px; 
+    border-radius: 10px;
+    background-color: #6d5ce5;
+    text-align: center;
+}
+
+.dateForm select{
+    font-family: Calibri;
+    font-size: 100%;
+    background-color: #dbdbdb;
+}
+
+.dateForm input[type="submit"]{
+    margin-top: 10px;
+    padding: 10px auto 10px auto;
+    width: 150px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.error{
+    width: 230px; 
+    margin: 20px auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: red;
+    text-align: center;
+}
+
+.exchange{
+    width: 260px; 
+    margin: 20px auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: #7ac946;
+    text-align: center;
+}
