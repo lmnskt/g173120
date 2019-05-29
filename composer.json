@@ -3,5 +3,7 @@
     "description": "Description[]",
     "license": "proprietary",
     "minimum-stability": "dev",
-    "require": {}
+    "autoload": {
+		"classmap":["src"]
+	}
 }
