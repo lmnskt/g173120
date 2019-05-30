@@ -14,6 +14,6 @@
     "minimum-stability": "dev",
     "require":
     {
-        "lmnskt/g173120": "dev-master"   
+        "lmnskt/dolgosrok": "dev-master"   
     }
 }
