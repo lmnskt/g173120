@@ -1,21 +1,22 @@
 <?php
 
-    class Dolgosrok{
+    class CurrencyExchange{
         
-        public function CurrencyExchange(){
-            
-            //валюты
-            $currenciesArr = [
-                '1'     => ['USA dollar', 'USD', '840'], //доллар США
-                '2'     => ['European euro', 'EUR', '978'], //евро
-                '3'     => ['Japanese yen', 'JPY', '392'], //японская йена
-                '4'     => ['Pound sterling', 'GBP', '826'], //британский фунт
-                '5'     => ['Swiss franc', 'CHF', '756'], //швейцарский франк
-                '6'     => ['Canadian dollar', 'CAD', '124'], //канадский доллар
-                '7'     => ['Australian dollar', 'AUD', '036'], //австралийский доллар
-                '8'     => ['New Zealand dollar', 'NZD', '554']  //новозеландский доллар        
-            ];
+        function GetCurrencyExchange(){
+            //url с информацией о валютах
+            $currencises_url = "http://cbr.ru/eng/currency_base/daily/?date_req=".date("d").".".date("m").".".date("Y");
+            $currencises_data = file_get_contents($currencises_url);
 
+            //находим строки
+            preg_match_all("/<tr.*?>(.*?)<\/[\s]*tr>/s", $currencises_data, $rows);
+
+            //заполнение массива валют
+            for($i = 1; $i < count($rows[1]); ++$i){       
+                preg_match_all("/<td.*?>(.*?)<\/[\s]*td>/", $rows[1][$i], $cell);
+                $currenciesArr[$i] = [$cell[1][3], $cell[1][1], $cell[1][0]];
+            }
+
+            //заполнение значений "по умолчанию"
             isset($_POST["currency"])       ? $currency = $currenciesArr[$_POST["currency"]][2]         : $currency = '840';
             isset($_POST["currency"])       ? $currencyName = $currenciesArr[$_POST["currency"]][1]     : $currencyName = 'USD';
             isset($_POST["day"])            ? $day = $_POST["day"]                                      : $day = date("d");
@@ -34,6 +35,7 @@
 
                         <body>";
 
+            //выбор валюты
             $code .=
                         "<div class=\"currencyForm\">
                             <h3>Select currency</h3>               
@@ -52,6 +54,7 @@
                                 "<select>
                         </div>";
 
+            //выбор дня
             $code .=
                         "<div class=\"dateForm\">
                             <h3>Select date</h3>               
@@ -69,7 +72,7 @@
             $code .=                        
                                 "<select>&nbsp;&nbsp;";
 
-
+            //выбор месяца
             $code .=
                                 "<select name=\"month\">";
                                     for($i = 1; $i <= 12; ++$i){
@@ -84,6 +87,7 @@
             $code .=                        
                                 "<select>&nbsp;&nbsp;";                           
 
+            //выбор года
             $code .=
                                 "<select name=\"year\">";
                                     for($i = 2000; $i <= date("Y"); ++$i){
@@ -100,6 +104,7 @@
                                  <input type=\"submit\" value=\"Calculate\">
                         </div>";
 
+            //если введена некорректная дата
             if((strtotime("$year-$month-$day") > strtotime(date("Y-m-d"))) || !checkdate($month, $day, $year)){
                 $code .=
                         "<div class=\"error\">
@@ -107,10 +112,11 @@
                          </div>";
             }
 
+            //если все ок, отображаем курс валют
             else{
-                $url = "http://cbrates.rbc.ru/tsv/$currency/$year/$month/$day.tsv";
-                $data = file_get_contents($url);
-                preg_match('/(\d+)(\s)([0-9].+)/', $data, $matches);
+                $exchange_url = "http://cbrates.rbc.ru/tsv/$currency/$year/$month/$day.tsv";
+                $exchange_data = file_get_contents($exchange_url);
+                preg_match('/(\d+)(\s)([0-9].+)/', $exchange_data, $matches);
 
                 $code .= 
                         "<div class=\"exchange\">
@@ -122,6 +128,6 @@
                         "</body>
                     </html>";
 
-            return $code;
+            echo $code;
         }
     }
