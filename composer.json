@@ -1,9 +1,13 @@
 {
-    "name": "lmnskt/dolgosrok",
-    "description": "Get currency exchange for each currency in each day",
+    "name": "-/dolgosrok",
+    "description": "Get currency exchange for each day",
     "license": "proprietary",
+    "authors": [
+        {
+            "name": "lmnskt",
+            "email": "lmnskate@yandex.ru"
+        }
+    ],
     "minimum-stability": "dev",
-    "autoload": {
-		"classmap":["src"]
-	}
+    "require": {}
 }
