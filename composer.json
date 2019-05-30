@@ -8,6 +8,12 @@
             "email": "lmnskate@yandex.ru"
         }
     ],
+    "autoload": {
+           "classmap": ["src"]
+    },
     "minimum-stability": "dev",
-    "require": {}
+    "require":
+    {
+        "lmnskt/g173120": "dev-master"   
+    }
 }
